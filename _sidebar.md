@@ -1,2 +1,2 @@
-* [Standards](matlab_standards.md)
+* [Matlab Code Standards](matlab_standards.md)
 
