@@ -552,7 +552,7 @@ end
 
 DO:
 
-[Header Example](examples.md #Primary-Function-Header)
+[Header Example](./examples.md#Primary-Function-Header)
 
 DON'T:
 ```matlab
