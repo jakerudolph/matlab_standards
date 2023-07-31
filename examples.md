@@ -1,6 +1,6 @@
 Below are examples referred to by the standards.
 
-# Primary Function Header
+## Primary Function Header
 
 ```matlab
  function dataslice = fetch_bsa_slice(timeRange, PVs, varargin)
