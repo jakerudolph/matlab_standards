@@ -1394,7 +1394,7 @@ end
 
 ## Error Handling
 
-**Description:** Callback functions **MUST** have all their code in a try/catch loop, and follow appropriate error handling methods.
+**Description:** Callback functions **MUST** have all their code in a try/catch loop, and follow appropriate error handling methods outlined [here](./examples.md#Error-Handling).
 
 **Rationale:** Proper error handling prevents an application from crashing.
 
