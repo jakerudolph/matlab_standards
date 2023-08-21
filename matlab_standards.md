@@ -8,7 +8,7 @@ This section describes recommendations for naming conventions.
 
 **Description:** Functions and variables **MUST NOT** shadow Mathworks-shipped functionality or other code. This includes MATLAB files (.m, .p, .mlapp, .mlx), mex-files (.mexw32 etc.) and Simulink files (.mdl, .slx).
 
-**Rationale:** Shadowing code can result in unexpected behaviour, because it is unclear and not properly defined for example what function is called when multiple ones share the same name.
+**Rationale:** Shadowing code can result in unexpected behavior, because it is unclear and not properly defined for example what function is called when multiple ones share the same name.
 
 ## Units
 
@@ -410,7 +410,7 @@ end
 
 ## Line Length
 
-**Description:** Lines **SHOULD** be no more than 120 characters long, including comments. When possible, keep lines shorter than 80 chracters long. 
+**Description:** Lines **SHOULD** be no more than 120 characters long, including comments. When possible, keep lines shorter than 80 characters long. 
 
 **Rationale:** A line of code should fit on a screen. Long lines of code are difficult to interpret and generally indicate great complexity.
 
@@ -548,7 +548,7 @@ end
 
 **Description:** Header comments **SHOULD** be written with text markup to provide user documentation useful both in-file and when using the help and lookfor functions.
 
-**Rationale:** This increases readability, and makes the code more likely to be found and less likely to be reinvented. 
+**Rationale:** This increases readability and makes the code more likely to be found and less likely to be reinvented. 
 
 DO:
 
@@ -857,7 +857,7 @@ d = a * b && c;
 
 **Description:** Parentheses **SHOULD** be used to clarify the precedence of operands in expressions with multiple logical operators. No parentheses are required when only one type of logical operator is used. For example: d = a && b && c;. 
 
-**Rationale:** By clarifying the precedence of the operands in such expressions, readability is improved and unexpected behaviour is prevented. 
+**Rationale:** By clarifying the precedence of the operands in such expressions, readability is improved and unexpected behavior is prevented. 
 
 DO:
 ```matlab
@@ -873,7 +873,7 @@ d = (a && b) || c;
 
 **Description:** Parentheses **SHOULD** be used to clarify the precedence of operands in expressions with multiple mathematical operators. No parentheses are required when only one type of mathematical operator is used. For example: d = a * b * c;. 
 
-**Rationale:** By clarifying the precedence of the operands in such expressions, readability is improved and unexpected behaviour is prevented. 
+**Rationale:** By clarifying the precedence of the operands in such expressions, readability is improved and unexpected behavior is prevented. 
 
 DO:
 ```matlab
@@ -911,9 +911,9 @@ assert(~isempty(list))
 
 ## Constant Conditional Statements
 
-**Description:** Cconditions that are always true or always false, such as if true or elseif 0, **SHOULD NOT** be used. MATLAB's Code Analyzer warns about some of these cases. 
+**Description:** Conditions that are always true or always false, such as if true or elseif 0, **SHOULD NOT** be used. MATLAB's Code Analyzer warns about some of these cases. 
 
-**Rationale:** These constructs may cause unreachable code or unintended behaviour. 
+**Rationale:** These constructs may cause unreachable code or unintended behavior. 
 
 DO:
 ```matlab
@@ -1019,7 +1019,7 @@ DON'T:
 
 **Description:** The try construct **SHOULD** only be used for exception handling. An exception object must be assigned or created and an error function must be called in the catch. Do not use try/catch to suppress errors or to express simple conditions. There are other, more suitable options for that. 
 
-**Rationale:** Using try for simple error suppression can result in poor performance and unexpected behaviour. When a different error occurs than the one expected, it can go undetected because of the try/catch. 
+**Rationale:** Using try for simple error suppression can result in poor performance and unexpected behavior. When a different error occurs than the one expected, it can go undetected because of the try/catch. 
 
 DO:
 ```matlab
@@ -1039,7 +1039,7 @@ catch
 end
 ```
 
-## Floaitng-Point Comparisons
+## Floating-Point Comparisons
 
 **Description:** Floating-point values **SHOULD NOT** be compared using == or ~=. Use a tolerance instead. 
 
@@ -1186,7 +1186,7 @@ DON'T:
 out = computeWeight(blockHeight, blockWidth, blockDepth, density, nBlocks, idx);
 ```
 
-## Constructos with Single Output
+## Constructors with Single Output
 
 **Description:** Every constructor **MUST** have exactly one output: an object of the class. 
 
@@ -1241,7 +1241,7 @@ DON'T:
 
 **Description:** Dependent properties **SHOULD** not be used. Write explicit methods for getting or setting property values if necessary instead of get.<property> and set.<property>syntax.
 
-**Rationale:** Property getters and setters can cause unexpected behaviour because code is run unexpectedly when the property's value is changed or requested. 
+**Rationale:** Property getters and setters can cause unexpected behavior because code is run unexpectedly when the property's value is changed or requested. 
 
 ## Nesting Depth
 
