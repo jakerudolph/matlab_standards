@@ -62,7 +62,7 @@ Below are examples referred to by the standards.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ```
 ## Error Handling
-All errors, both from MATLAB and in the functional execution of code, must be handled. In the context of GUIs, error handling should be used in all callback functions to prevent the GUI from ever crashing. Error handling should communicate both what happened when a problem was encountered, and what the code was in the middle of doing when the error occurred. The following programming pattern displays that information in a dialog box and prints the relevant information to a log. In short, use it everywhere. It works for GUIs as well as for functions and scripts called outside the context of a GUI. See below for how to implement this pattern to in GUIs to catch all kinds of errors, as well as for detecting errors of a specific application.
+All errors, both from MATLAB and in the functional execution of code, must be handled. In the context of GUIs, error handling should be used in all callback functions to prevent the GUI from ever crashing. Error handling should communicate both what happened when a problem was encountered, and what the code was in the middle of doing when the error occurred. In general, it is recommended to display high-level error information in a dialog box and print relevant detailed information to a log. This is the recommended paractice for GUIs as well as for functions and scripts called outside the context of a GUI. THe recommended error handling practices are as follows:
 
 1. For GUIs, all callbacks should be wrapped in a try/catch loop.
 
@@ -76,7 +76,9 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 
 4. The error() function's first argument should be the aforementioned message code string, and the second a more descriptive explanation. In every other (non-callback method), especially API methods, "throw exception." That is, whenever the program can't go on because of a functional problem, for example, you detect from EPICS that a wire is stuck, call error(). The method SHOULD also lprintf what happened.
 
-5. In general, you should check for error status’s on all EPICS gets and puts, and implement appropriate error handling as described.
+5. In general, you should check for error status on all EPICS gets and puts, and implement appropriate error handling as described.
+
+6. Do not catch and ignore errors, the user should always be informed of an error
 
 Example of error handing pattern
 
