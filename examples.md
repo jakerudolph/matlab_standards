@@ -78,7 +78,7 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 
 5. In general, you should check for error status on all EPICS gets and puts, and implement appropriate error handling as described.
 
-6. Do not catch and ignore errors, the user should always be informed of an error
+6. Do not catch and ignore errors; the user should always be informed of an error.
 
 Example of error handing pattern
 
