@@ -62,25 +62,7 @@ Below are examples referred to by the standards.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ```
 ## Error Handling
-All errors, both from MATLAB and in the functional execution of code, must be handled. In the context of GUIs, error handling should be used in all callback functions to prevent the GUI from ever crashing. Error handling should communicate both what happened when a problem was encountered, and what the code was in the middle of doing when the error occurred. In general, it is recommended to display high-level error information in a dialog box and print relevant detailed information to a log. This is the recommended paractice for GUIs as well as for functions and scripts called outside the context of a GUI. THe recommended error handling practices are as follows:
-
-1. For GUIs, all callbacks should be wrapped in a try/catch loop.
-
-2. In the catch section, check for specific types of errors related to your application and respond accordingly. These errors should have a message code string, in the MATLAB style, using a prefix id specific to your app. You use the id in the callback function to identify your app's exceptions. This is important because your app's exceptions should not cause stacktraces in the log (the ugly and largely useless "crash" stuff). Only the others, ie MATLAB’s own exceptions, should cause such stacktraces. In that way, errors like "division by 0" get a stacktrace, useful for debugging, whereas errors like "Couldn't move wire scan motor" do not, since that's not a bug in MATLAB, it's just something it wasn't able to do but handled gracefully. The GUI may need to respond differently depending on the type of exception as well, so it is recommended that you don't just have one general catch statement that responds to all expections in exactly the same manner.
-
-    a. If the exception is not one of the specific kinds your code looks for, the relevant information should be extracted from the stacktrace and communicated, including its location. Note, as a developer, you should pay attention to what kinds of errors are common, and do your best to encapsulate them with custom error IDs.
-
-    b. Use uiwait(errordlg(lprintf())) in the catch block to communicate the error information to the log and in a dialogue box.
-
-3. In the algorithmic function, when an error is detected, immediately (on the next line after you detected the error) issue a message using the Matlab "error" function.
-
-4. The error() function's first argument should be the aforementioned message code string, and the second a more descriptive explanation. In every other (non-callback method), especially API methods, "throw exception." That is, whenever the program can't go on because of a functional problem, for example, you detect from EPICS that a wire is stuck, call error(). The method SHOULD also lprintf what happened.
-
-5. In general, you should check for error status on all EPICS gets and puts, and implement appropriate error handling as described.
-
-6. Do not catch and ignore errors; the user should always be informed of an error.
-
-Example of error handing pattern
+Example of error handing pattern:
 
 [NOTE: constants below eg STDERR, WS_EXID_PREFIX etc, are defined in wirescan_const.m).
 
