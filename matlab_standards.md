@@ -1,4 +1,18 @@
 # MATLAB Standards
+*These standards apply to all newly written or newly modified code. It is not expected that existing code will be modified to conform with these standards.*
+
+**STATUS:** This document is in development as of July 17th, 2023
+
+**Scope:** This document details source code requirements and programming idioms required for all MATLAB code of the Accelerator Directorate, SLAC National Accelerator Laboratory. It additionally gives some recommended practices and examples.
+
+**Purpose:** The purpose of this document is to provide consistent guidelines for producing robust, readable code.
+
+**Use of Normative Statements:**
+
+  * **MUST,** in all capitalized letters, indicates a mandatory standard.
+  * **SHOULD,** in all capitalized letters, indicates a recommended standard.
+  * **MAY,** in all capitalized letters, indicates a recommended, but optional practice.
+
 
 # Naming Conventions
 
@@ -1438,26 +1452,47 @@ end
 
 **Description:** GUIs **SHOULD** have tooltips that explain what components do.
 
-**Rationale:** Tooltips make GUIs easier to use.
+**Rationale:** Tooltips make GUIs easier to use and understand.
 
-## Style Guide
+## Containers
 
-**Description:** GUIs **SHOULD** conform to the style guide detailed <u>here</u>. (Style guide to be inserted)
+**Description:** GUIS **SHOULD** use containers (such as panels, group boxes and tabs) to group together components with a similar purpose. 
 
-**Rationale:** The style guide specifies best practices for user experience.
+**Rationale:** Grouping related components together is more intuitive for the user and makes reorganizing the user interface easier for the developer as they can just move or resize the container as opposed to every individual component.
+
+## Menus
+
+**Description:** GUIs **SHOULD** have save, load and help menus at the top of a GUI in a menu bar drop down.
+
+**Rationale:** This is standard practice in a large variety of applications and helps avoid cluttering the GUI with additional buttons.
+
+## Visual/Style Guidelines
+
+**Description:** These are recommended but optional practices:
+- GUIs **MAY** have a dark motif, or a selectable dark mode.
+- GUIs **MAY** have large enough font to be seen while standing behind an operator.
+- GUIs **MAY NOT** have bright or flashing indicators.
+
+**Rationale:** Dark themes typically provide more contrast, and larger font is easier to see from distance or with lower contrast. Bright or flashing elements usually distract from the GUI as a whole and generally don't provide extra value b virtue of being bright or flashy.
 
 # Error Handling
-All errors, both from MATLAB and in the functional execution of code, must be handled. In the context of GUIs, error handling should be used in all callback functions to prevent the GUI from ever crashing. Error handling **SHOULD** communicate both what happened when a problem was encountered, and what the code was in the middle of doing when the error occurred. In general, it is **RECOMMENDED** to display high-level error information in a dialog box and print relevant detailed information to a log. This is the recommended practice for GUIs as well as for functions and scripts called outside the context of a GUI. The recommended error handling practices are detailed below, and a code example of the error handling pattern can be found in the [Error Handling Example](./examples.md#Error-Handling).
+All errors, both from MATLAB and in the functional execution of code, must be handled. In the context of GUIs, error handling should be used in all callback functions to prevent the GUI from ever crashing. Error handling **SHOULD** communicate both what happened when a problem was encountered, and what the code was in the middle of doing when the error occurred. In general, one **SHOULD** display high-level error information in a dialog box and print relevant detailed information to a log. The recommended error handling practices are detailed below, and a code example of the error handling pattern can be found in the [Error Handling Example](./examples.md#Error-Handling).
 
 ## Callbacks 
 
-**Description:** For GUIs, all callbacks **SHOULD** be wrapped in a try/catch loop
+**Description:** For GUIs, all callbacks **SHOULD** be wrapped in a try/catch loop.
 
 **Rationale:** This helps prevent the GUI from crashing. Callbacks are used frequently and may encounter errors.
 
+## Ignoring or Silencing Exceptions
+
+**Description:** Code **SHOULD NOT** catch and ignore (or pass, or silence) errors; the user should always be informed of an error.
+
+**Rationale:** Passing or ignoring exceptions makes it harder for a developer to maintain/debug code or for the user to understand when something is going wrong.
+
 ## Checking for Specific Errors
 
-**Description:** In the catch section, code **SHOULD** check for specific types of errors related to your application and respond accordingly. These errors should have a message code string, in the MATLAB style, using a prefix id specific to your app. You use the id in the callback function to identify your app's exceptions. Code **SHOULD NOT** have one general catch statement that responds to all exceptions in exactly the same manner.
+**Description:** In the catch section, code **SHOULD** check for specific types of errors and respond accordingly. These errors should have a message code string, in the MATLAB style, using a prefix id specific to your app. You use the id in the callback function to identify your app's exceptions. Code **SHOULD NOT** have one general catch statement that responds to all exceptions in exactly the same manner.
 - If the exception is not one of the specific kinds your code looks for, the relevant information should be extracted from the stacktrace and communicated, including its location. As a developer, one should pay attention to what kinds of errors are common, and do their best to encapsulate them with custom error IDs.
 - Use uiwait(errordlg(lprintf())) in the catch block to communicate the error information to the log and in a dialogue box.
 
@@ -1465,7 +1500,7 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 
 ## Using the Error Function
 
-**Description:** In the algorithmic function, when an error is detected, code **SHOULD** immediately (on the next line after you detected the error) issue a message using the Matlab "error" function. The error() function's first argument should be the aforementioned message code string, and the second a more descriptive explanation. In every other (non-callback method), especially API methods, use "throw(exception)." That is, whenever the program can't go on because of a functional problem, for example, you detect from EPICS that a wire is stuck, call error(). The method should also lprintf what happened.
+**Description:** In the algorithmic function, when an error is detected, code **SHOULD** immediately (on the next line after you detected the error) issue a message using the Matlab "error" function. The error() function's first argument should be the aforementioned message code string, and the second a more descriptive explanation. In every other (non-callback) method, especially API methods, use "throw(exception)". That is, whenever the program can't go on because of a functional problem, for example, you detect from EPICS that a wire is stuck, call error(). The method should also lprintf what happened.
 
 **Rationale:** This function is built in to Matlab and automatically captures information about the error, storing information in an MException class data structure which can be thrown if desired. Using this function helps standardize error reporting and is already familiar to users of Matlab.
 
@@ -1473,13 +1508,7 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 
 **Description:** In general, code **SHOULD** check for error status on all EPICS gets and puts and implement appropriate error handling as described in the HLA Programmer's Guide [labca exceptions and error handling](https://www.slac.stanford.edu/grp/ad/docs/model/matlab/programmers_guide.html#labca) section.
 
-**Rationale:** EPICS interaction can produce a variety of errors that need to be handled properly.
-
-## Ignoring or Silencing Exceptions
-
-**Description:** Code **SHOULD NOT** catch and ignore (or pass, or silence) errors; the user should always be informed of an error.
-
-**Rationale:** Passing or ignoring exceptions makes it harder for a developer to maintain/debug code or for the user to understand when something is going wrong.
+**Rationale:** EPICS interaction can produce a variety of errors that need to be handled properly. Furthermore, when operating on devices in the field, it is critically important that the status/outcome of the operation is definitively known and clearly communicated to the end user. 
 
    
 
