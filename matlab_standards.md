@@ -1392,12 +1392,6 @@ end
 
 # Standards for Graphical User Interfaces (GUIs)
 
-## Error Handling
-
-**Description:** Callback functions **MUST** have all their code in a try/catch loop, and follow appropriate error handling methods outlined [here](./examples.md#Error-Handling).
-
-**Rationale:** Proper error handling prevents an application from crashing.
-
 ## Separable Models
 
 **Description:** Model classes **SHOULD** be able to run without the GUI itself. Consider the separate aspects of a model, including service logic, service configuration, and application state management.
@@ -1452,4 +1446,40 @@ end
 
 **Rationale:** The style guide specifies best practices for user experience.
 
+# Error Handling
+All errors, both from MATLAB and in the functional execution of code, must be handled. In the context of GUIs, error handling should be used in all callback functions to prevent the GUI from ever crashing. Error handling **SHOULD** communicate both what happened when a problem was encountered, and what the code was in the middle of doing when the error occurred. In general, it is **RECOMMENDED** to display high-level error information in a dialog box and print relevant detailed information to a log. This is the recommended practice for GUIs as well as for functions and scripts called outside the context of a GUI. The recommended error handling practices are detailed below, and a code example of the error handling pattern can be found in the [Error Handling Example](./examples.md#Error-Handling).
+
+## Callbacks 
+
+**Description:** For GUIs, all callbacks **SHOULD** be wrapped in a try/catch loop
+
+**Rationale:** This helps prevent the GUI from crashing. Callbacks are used frequently and may encounter errors.
+
+## Checking for Specific Errors
+
+**Description:** In the catch section, code **SHOULD** check for specific types of errors related to your application and respond accordingly. These errors should have a message code string, in the MATLAB style, using a prefix id specific to your app. You use the id in the callback function to identify your app's exceptions. Code **SHOULD NOT** have one general catch statement that responds to all exceptions in exactly the same manner.
+- If the exception is not one of the specific kinds your code looks for, the relevant information should be extracted from the stacktrace and communicated, including its location. As a developer, one should pay attention to what kinds of errors are common, and do their best to encapsulate them with custom error IDs.
+- Use uiwait(errordlg(lprintf())) in the catch block to communicate the error information to the log and in a dialogue box.
+
+**Rationale:** Code will often need to respond to different errors in different ways. Exceptions should also generally not cause stacktraces in the log (the ugly and largely useless "crash" stuff). Only the others, i.e. MATLAB’s own exceptions, should cause such stacktraces. In that way, errors like "division by 0" get a stacktrace, useful for debugging, whereas errors like "Couldn't move wire scan motor" do not, since that's not a bug in MATLAB, it's just something it wasn't able to do but handled gracefully.
+
+## Using the Error Function
+
+**Description:** In the algorithmic function, when an error is detected, code **SHOULD** immediately (on the next line after you detected the error) issue a message using the Matlab "error" function. The error() function's first argument should be the aforementioned message code string, and the second a more descriptive explanation. In every other (non-callback method), especially API methods, use "throw(exception)." That is, whenever the program can't go on because of a functional problem, for example, you detect from EPICS that a wire is stuck, call error(). The method should also lprintf what happened.
+
+**Rationale:** This function is built in to Matlab and automatically captures information about the error, storing information in an MException class data structure which can be thrown if desired. Using this function helps standardize error reporting and is already familiar to users of Matlab.
+
+## EPICS Gets and Puts
+
+**Description:** In general, code **SHOULD** check for error status on all EPICS gets and puts and implement appropriate error handling as described in the HLA Programmer's Guide [labca exceptions and error handling](https://www.slac.stanford.edu/grp/ad/docs/model/matlab/programmers_guide.html#labca) section.
+
+**Rationale:** EPICS interaction can produce a variety of errors that need to be handled properly.
+
+## Ignoring or Silencing Exceptions
+
+**Description:** Code **SHOULD NOT** catch and ignore (or pass, or silence) errors; the user should always be informed of an error.
+
+**Rationale:** Passing or ignoring exceptions makes it harder for a developer to maintain/debug code or for the user to understand when something is going wrong.
+
+   
 
