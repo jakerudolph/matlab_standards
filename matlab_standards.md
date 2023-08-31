@@ -1,7 +1,7 @@
 # MATLAB Standards
-*These standards apply to all newly written or newly modified code. It is not expected that existing code will be modified to conform with these standards.*
+*These standards apply to all newly written or newly modified code. It is not expected that existing code will be retrofitted to conform with these standards.*
 
-**STATUS:** This document is in development as of July 17th, 2023
+**Status:** This document is in development as of July 17th, 2023
 
 **Scope:** This document details source code requirements and programming idioms required for all MATLAB code of the Accelerator Directorate, SLAC National Accelerator Laboratory. It additionally gives some recommended practices and examples.
 
@@ -16,7 +16,6 @@
 
 # Naming Conventions
 
-This section describes recommendations for naming conventions.
 
 ## Name Shadowing
 
@@ -292,8 +291,6 @@ bpmC
 **Rationale:** This increases the readability of the code as it is clear from the name of the file that it is a unit test file.
 
 # Layouts and Comments
-
-This section describes recommendations for code layout and comments.
 
 ## Comment Usage
 
