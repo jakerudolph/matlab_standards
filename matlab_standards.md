@@ -1532,7 +1532,7 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 **Description:** Code release **MUST** be done in conjunction with the Controls Deputy, following this procedure:
 1. Create a CATER job to release the code. Fill out all sections in detail (release date/time, test plan, backout plan etc.).
 2. Request approval from the Controls Deputy (CD).
-3. The CD will review the CATER job, verify it has been reviewed, and provide CD Approval through CATER.
+3. The CD will verify code review is complete, review the release plan and provide CD Approval through CATER.
 4. Once CD has provided approval, software may be deployed to production.
 
 **Rationale:** A standardized release procedure with proper planning helps to ensure a smooth code release process that minimizes the chance of unexpected issues.
