@@ -1527,7 +1527,7 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 
 **Rationale:** This ensures that new code has been properly reviewed and provides a second contact person who is familiar with the code.
 
-##Release Procedure
+## Release Procedure
 
 **Description:** Code release **MUST** be done in conjunction with the Controls Deputy, following this procedure:
 1. Create a CATER job to release the code. Fill out all sections in detail (release date/time, test plan, backout plan etc.).
