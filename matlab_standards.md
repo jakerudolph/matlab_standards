@@ -1513,11 +1513,11 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 ## Review Criteria and Process
 
 **Description:** All releases of code with more than 400 total lines **MUST** be reviewed. The process is as follows:
-1. Create a CATER for your code changes.
-2. Nominate someone to review your code, and assign a code review job through the CATER.
-3. Reviewer has three business days to review the code and attach/explain their findings and recommendations in the CATER job. The detailed review process can be conducted through Github or any other platform if desired.
+1. Create a Software Maintenance CATER for your code changes.
+2. Nominate someone to review your code, and assign them a task for code review through the CATER.
+3. Reviewer has three business days to review the code and attach/explain their findings and recommendations in the CATER task. The detailed review process can be conducted through Github or any other platform if desired.
 4. Implement feedback from the reviewer, and/or deliberate on their recommended changes.
-5. Once the reviewer is satisfied, the reviewer may mark the code review job as complete in CATER.
+5. Once the reviewer is satisfied, the reviewer may mark the code review task as complete in CATER.
 
 **Rationale:** Review can lead to more efficient and effective code and uncover potential problems that the developer may have missed. It also leads to more effective collaboration among developers and helps prevent code duplication.
  
@@ -1530,7 +1530,7 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 ## Release Procedure
 
 **Description:** Code release **MUST** be done in conjunction with the Controls Deputy, following this procedure:
-1. Create a CATER job to release the code. Fill out all sections in detail (release date/time, test plan, backout plan etc.).
+1. Create a software job in the existing CATER to release the code. Fill out all sections in detail (release date/time, test plan, backout plan etc.).
 2. Request approval from the Controls Deputy (CD).
 3. The CD will verify code review is complete, review the release plan and provide CD Approval through CATER.
 4. Once CD has provided approval, software may be deployed to production.
