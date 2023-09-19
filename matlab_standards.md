@@ -1508,16 +1508,27 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 **Rationale:** EPICS interaction can produce a variety of errors that need to be handled properly. Furthermore, when operating on devices in the field, it is critically important that the status/outcome of the operation is definitively known and clearly communicated to the end user. 
 
 
-# Code Review
+# Code Review and Release
+Code review and formal release **MUST** take place for any new deployment of production code and for any modification of existing production code functionality where the new/modified code totals more than 200 lines. It was decided to set a threshold of 200 lines of new or modified code to trigger a required code review, but review **MUST** also take place for non-trivial changes even if the amount of modified lines is less than this. Non-trivial changes typically include new functionality such as (but not limited to) the following:
+
+- Different calculation or measurement functionality.
+- Different accelerators or facilities.
+- Different machine model functionality.
+- Different dependencies or different accelerator element lists.
+- ANY new code that will control magnets, instrumentation, RF or other accelerator devices in a new or different way
+
+An example of a trivial change would be a simple and specific bug fix; this does not require following the formal review/release procedures below. It is left to the developer to determine if their change is trivial and to ensure that they follow these rules if their change is non-trivial. It is also left to the developer and reviewer to determine what form code review takes and if any external tools are used (e.g. Github) to aid in the process.
+
+Code review does not imply that all pre-existing code has to conform to this entire standards document. Only the new or newly modified portions of the code are expected to conform to these standards.
 
 ## Review Criteria and Process
 
-**Description:** All releases of code with more than 400 total lines **MUST** be reviewed. The process is as follows:
+**Description:** All releases consisting of more than 200 lines of new or modified code OR consisting of a non-trivial change of existing code **MUST** be reviewed. The process is as follows:
 1. Create a Software Maintenance CATER for your code changes.
 2. Nominate someone to review your code, and assign them a task for code review through the CATER.
-3. Reviewer has three business days to review the code and attach/explain their findings and recommendations in the CATER task. The detailed review process can be conducted through Github or any other platform if desired.
+3. Reviewer has three business days to review the code and explain their findings and recommendations in the CATER task feedback section. The detailed review process can be conducted through Github or any other platform if desired.
 4. Implement feedback from the reviewer, and/or deliberate on their recommended changes.
-5. Once the reviewer is satisfied, the reviewer may mark the code review task as complete in CATER.
+5. Once the reviewer is satisfied, the reviewer may mark the code review task as complete in CATER. This signifies a finalized review.
 
 **Rationale:** Review can lead to more efficient and effective code and uncover potential problems that the developer may have missed. It also leads to more effective collaboration among developers and helps prevent code duplication.
  
@@ -1525,14 +1536,14 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 
 **Description:** The name of the reviewer **MUST** be documented in the code header.
 
-**Rationale:** This ensures that new code has been properly reviewed and provides a second contact person who is familiar with the code.
+**Rationale:** This ensures that new code has been properly reviewed and provides a second contact person who is familiar with the code changes.
 
 ## Release Procedure
 
-**Description:** Code release **MUST** be done in conjunction with the Controls Deputy, following this procedure:
+**Description:** If code review was required (and has already been completed), code release **MUST** be done in conjunction with the Controls Deputy, following this procedure:
 1. Create a software job in the existing CATER to release the code. Fill out all sections in detail (release date/time, test plan, backout plan etc.).
 2. Request approval from the Controls Deputy (CD).
-3. The CD will verify code review is complete, review the release plan and provide CD Approval through CATER.
+3. The CD will review the release plan and provide CD Approval through CATER as part of their normal planning process.
 4. Once CD has provided approval, software may be deployed to production.
 
 **Rationale:** A standardized release procedure with proper planning helps to ensure a smooth code release process that minimizes the chance of unexpected issues.
