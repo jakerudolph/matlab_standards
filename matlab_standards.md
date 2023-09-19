@@ -202,7 +202,7 @@ modelFunction
 
 ## Function Name Construction
 
-**Description:** Function names **SHOULD** consist of a verb (action) followed by a noun (direct object). For class methods, the direct object may be omitted if it is redundant. 
+**Description:** Function names **SHOULD** consist of a verb (action) followed by a noun (direct object). For class methods, the direct object can be omitted if it is redundant. 
 
 **Rationale:** This way it is more likely to be clear what the function does and if there is no suitable name following this guideline, (for example because the function does more than one thing) the function may have to be refactored.
 
@@ -340,7 +340,7 @@ end
 
 ## Sign and Date Comments
 
-**Description:** Comments with a date and signature **MAY** be used when adding code to an existinf file.
+**Description:** Comments with a date and signature **MAY** be used when adding code to an existing file.
 
 **Rationale:** This ensures that other code maintainers have access to information about the code history regardless of how version control is deployed. 
 
@@ -746,7 +746,7 @@ x = rand * 2;
 
 **Rationale:** Maintain readability of your code by having each line of code do exactly one thing. 
 
-**Exception:** One may declare a maximum of three variables on a single line if they are all of the same type or unit. One may place an if, for or while statement on one line if there is exactly one statement inside of the loop. 
+**Exception:** One can declare a maximum of three variables on a single line if they are all of the same type or unit. One can place an if, for or while statement on one line if there is exactly one statement inside of the loop. 
 
 DO:
 ```matlab
@@ -852,7 +852,7 @@ end
 
 **Description:** Multiple operand types **SHOULD NOT** be used in a single operator. For example, do not mix logical and numerical operatonds with a multiplication operator. 
 
-**Rationale:** Mixing operand types per operator can cause unexpected results and may lead to errors in case of true incompatibilities. 
+**Rationale:** Mixing operand types per operator can cause unexpected results and can lead to errors in case of true incompatibilities. 
 
 DO:
 ```matlab
@@ -924,7 +924,7 @@ assert(~isempty(list))
 
 **Description:** Conditions that are always true or always false, such as if true or elseif 0, **SHOULD NOT** be used. MATLAB's Code Analyzer warns about some of these cases. 
 
-**Rationale:** These constructs may cause unreachable code or unintended behavior. 
+**Rationale:** These constructs can cause unreachable code or unintended behavior. 
 
 DO:
 ```matlab
@@ -984,7 +984,7 @@ s.h = 'new field';
 **Description:** The built-in eval function **SHOULD NOT** be used. Use of feval, evalin and evalc **SHOULD** be minimized.
 
 **Rationale:** These functions can have harmful results and statements using them are usually difficult to read and maintain. 
-Additionally, it may be overlooked when variables are defined or altered by calls to these functions.
+Additionally, it can be overlooked when variables are defined or altered by calls to these functions.
 
 ## Keywords Break, Continue, and Return
 
@@ -1236,7 +1236,7 @@ end
 
 **Description:** Code Analyzer messages shown in the MATLAB editor **SHOULD** be prevented or suppressed. When the messages cannot be prevented, suppress them on an individual basis and add the reason in the comments. 
 
-**Rationale:** The messages usually indicate that improvements can be made to the performance or stability of the code. Adding file-wide Code Analyzer suppressions is discouraged because new triggers of the messages may be overlooked. 
+**Rationale:** The messages usually indicate that improvements can be made to the performance or stability of the code. Adding file-wide Code Analyzer suppressions is discouraged because new triggers of the messages can be overlooked. 
 
 DO:
 ```matlab
@@ -1413,7 +1413,7 @@ end
 
 **Description:** GUIs **MUST** be resizable for personal computers. Consider using grid layouts to ensure resizability.
 
-**Rationale:** The size of a GUI may vary between an individual's personal computer, and an operator interface in the control room. GUIs should be usable on both.
+**Rationale:** The size of a GUI can vary between an individual's personal computer, and an operator interface in the control room. GUIs should be usable on both.
 
 ## GUI Documentation
 
@@ -1467,10 +1467,10 @@ end
 
 **Description:** These are recommended but optional practices:
 - GUIs **MAY** have a dark motif, or a selectable dark mode.
-- GUIs **MAY** have large enough font to be seen while standing behind an operator.
-- GUIs **MAY NOT** have bright or flashing indicators.
+- GUIs **SHOULD** have large enough font to be seen while standing behind an operator.
+- GUIs **SHOULD NOT** have bright or flashing indicators.
 
-**Rationale:** Dark themes typically provide more contrast, and larger font is easier to see from distance or with lower contrast. Bright or flashing elements usually distract from the GUI as a whole and generally don't provide extra value b virtue of being bright or flashy.
+**Rationale:** Dark themes typically provide more contrast, and larger font is easier to see from distance or with lower contrast. Bright or flashing elements distract from the GUI as a whole and generally don't provide extra value by virtue of being bright or flashy.
 
 # Error Handling
 All errors, both from MATLAB and in the functional execution of code, must be handled. In the context of GUIs, error handling should be used in all callback functions to prevent the GUI from ever crashing. Error handling **SHOULD** communicate both what happened when a problem was encountered, and what the code was in the middle of doing when the error occurred. In general, one **SHOULD** display high-level error information in a dialog box and print relevant detailed information to a log. The recommended error handling practices are detailed below, and a code example of the error handling pattern can be found in the [Error Handling Example](./examples.md#Error-Handling).
