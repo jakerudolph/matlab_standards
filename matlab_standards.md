@@ -1515,7 +1515,8 @@ Code review and formal release **MUST** take place for any new deployment of pro
 - Different accelerators or facilities.
 - Different machine model functionality.
 - Different dependencies or different accelerator element lists.
-- ANY new code that will control magnets, instrumentation, RF or other accelerator devices in a new or different way
+- ANY new code that will control magnets, instrumentation, RF or other accelerator devices in a new or different way.
+- ANY new file.
 
 An example of a trivial change would be a simple and specific bug fix; this does not require following the formal review/release procedures below. It is left to the developer to determine if their change is trivial and to ensure that they follow these rules if their change is non-trivial. It is also left to the developer and reviewer to determine what form code review takes and if any external tools are used (e.g. Github) to aid in the process.
 
@@ -1524,11 +1525,13 @@ Code review does not imply that all pre-existing code has to conform to this ent
 ## Review Criteria and Process
 
 **Description:** All releases consisting of more than 200 lines of new or modified code OR consisting of a non-trivial change of existing code **MUST** be reviewed. The process is as follows:
-1. Create a Software Maintenance CATER for your code changes.
-2. Nominate someone to review your code, and assign them a task for code review through the CATER.
-3. Reviewer has three business days to review the code and explain their findings and recommendations in the CATER task feedback section. The detailed review process can be conducted through Github or any other platform if desired.
-4. Implement feedback from the reviewer, and/or deliberate on their recommended changes.
-5. Once the reviewer is satisfied, the reviewer may mark the code review task as complete in CATER. This signifies a finalized review.
+1. Create a CATER for your code changes (if one doesn't already exist):
+   - If adding new code or new functionality, make a 'Project/Enhancement/Request' CATER.
+   - If fixing or modifying existing code, make a 'SW Problem/Bug' CATER.
+3. Nominate someone to review your code, and assign them a task for code review through the CATER.
+4. Reviewer has three business days to review the code and explain their findings and recommendations in the CATER task feedback section. The detailed review process can be conducted through Github or any other platform if desired.
+5. Implement feedback from the reviewer, and/or deliberate on their recommended changes.
+6. Once the reviewer is satisfied, the reviewer may mark the code review task as complete in CATER. This signifies a finalized review.
 
 **Rationale:** Review can lead to more efficient and effective code and uncover potential problems that the developer may have missed. It also leads to more effective collaboration among developers and helps prevent code duplication.
  
