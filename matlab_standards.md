@@ -1509,22 +1509,22 @@ All errors, both from MATLAB and in the functional execution of code, must be ha
 
 
 # Code Review and Release
-Code review and formal release **MUST** take place for any new deployment of production code and for any modification of existing production code functionality where the new/modified code totals more than 200 lines. It was decided to set a threshold of 200 lines of new or modified code to trigger a required code review, but review **MUST** also take place for non-trivial changes even if the amount of modified lines is less than this. Non-trivial changes typically include new functionality such as (but not limited to) the following:
+Code review and formal release **MUST** take place for any deployment of production code totaling more than 300 new/modified lines. It was decided to set a threshold of 300 lines to trigger a required code review, but review **MUST** also take place for non-trivial changes even if the amount of modified lines is less than this. Non-trivial changes typically include new functionality such as (but not limited to) the following:
 
 - Different calculation or measurement functionality.
 - Different accelerators or facilities.
 - Different machine model functionality.
 - Different dependencies or different accelerator element lists.
-- ANY new code that will control magnets, instrumentation, RF or other accelerator devices in a new or different way.
+- ANY code that will control magnets, instrumentation, RF or other accelerator devices in a new or different way.
 - ANY new file.
 
-An example of a trivial change would be a simple and specific bug fix; this does not require following the formal review/release procedures below. It is left to the developer to determine if their change is trivial and to ensure that they follow these rules if their change is non-trivial. It is also left to the developer and reviewer to determine what form code review takes and if any external tools are used (e.g. Github) to aid in the process.
+An example of a trivial change would be a simple and specific bug fix or adding a simple UI element; this does not require following the formal review/release procedures below. It is left to the developer to determine if their change is trivial and to ensure that they follow these rules if their change is non-trivial. It is also left to the developer and reviewer to determine what form code review takes and if any external tools are used (e.g. Github) to aid in the process.
 
 Code review does not imply that all pre-existing code has to conform to this entire standards document. Only the new or newly modified portions of the code are expected to conform to these standards.
 
 ## Review Criteria and Process
 
-**Description:** All releases consisting of more than 200 lines of new or modified code OR consisting of a non-trivial change of existing code **MUST** be reviewed. The process is as follows:
+**Description:** All releases consisting of more than 300 lines of new or modified code OR consisting of a non-trivial change of existing code **MUST** be reviewed. The process is as follows:
 1. Create a CATER for your code changes (if one doesn't already exist):
    - If adding new code or new functionality, make a 'Project/Enhancement/Request' CATER.
    - If fixing or modifying existing code, make a 'SW Problem/Bug' CATER.
