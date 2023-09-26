@@ -526,6 +526,16 @@ isDone = isImplemented && ...
 
 **Rationale:** Having multiple blocks with the same attributes is unnecessary and decreases the readability of classdef files. 
 
+DO
+```matlab
+classdef Rocket 
+    properties (Constant) 
+        Fuel = "Nuclear" 
+        Capacity = 2 
+    end 
+end 
+```
+
 DON'T
 ```matlab
 classdef Rocket 
@@ -537,16 +547,6 @@ classdef Rocket
         Capacity = 2 
     end 
 end
-```
-
-DO
-```matlab
-classdef Rocket 
-    properties (Constant) 
-        Fuel = "Nuclear" 
-        Capacity = 2 
-    end 
-end 
 ```
  
 ## Whitespace at the End of a Line
