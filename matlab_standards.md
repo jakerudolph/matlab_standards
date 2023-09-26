@@ -1514,11 +1514,14 @@ Code review and formal release **MUST** take place for any deployment of product
 - Different calculation or measurement functionality.
 - Different accelerators or facilities.
 - Different machine model functionality.
-- Different dependencies or different accelerator element lists.
+- Different dependencies, or similarly modifying centralized code which many other users depend on.
+- Different active accelerator device or element lists.
 - ANY code that will control magnets, instrumentation, RF or other accelerator devices in a new or different way.
 - ANY new file.
+- Significant user interface modifications that change functionality or user experience.
+- Architectural changes such as moving a standalone GUI to a centralized service.
 
-An example of a trivial change would be a simple and specific bug fix or adding a simple UI element; this does not require following the formal review/release procedures below. It is left to the developer to determine if their change is trivial and to ensure that they follow these rules if their change is non-trivial. It is also left to the developer and reviewer to determine what form code review takes and if any external tools are used (e.g. Github) to aid in the process.
+An example of a trivial change would be a simple and specific bug fix or adding a simple UI element (like a logbook button); this does not require following the formal review/release procedures below. It is left to the developer to determine if their change is trivial and to ensure that they follow these rules if their change is non-trivial. It is also left to the developer and reviewer to determine what form code review takes and if any external tools are used (e.g. Github) to aid in the process. The reviewer may be anyone of the developer's choosing, and the proposed reviewer should be transparent about their availability/expertise while reserving the right to decline.
 
 Code review does not imply that all pre-existing code has to conform to this entire standards document. Only the new or newly modified portions of the code are expected to conform to these standards.
 
@@ -1529,9 +1532,9 @@ Code review does not imply that all pre-existing code has to conform to this ent
    - If adding new code or new functionality, make a 'Project/Enhancement/Request' CATER.
    - If fixing or modifying existing code, make a 'SW Problem/Bug' CATER.
 3. Nominate someone to review your code, and assign them a task for code review through the CATER.
-4. Reviewer has three business days to review the code and explain their findings and recommendations in the CATER task feedback section. The detailed review process can be conducted through Github or any other platform if desired.
+4. Reviewer has five business days to review the code and explain their initial findings and recommendations in the CATER task feedback section. The detailed review process can be conducted through Github or any other platform if desired, CATER is simply used to document that code review has taken place.
 5. Implement feedback from the reviewer, and/or deliberate on their recommended changes.
-6. Once the reviewer is satisfied, the reviewer may mark the code review task as complete in CATER. This signifies a finalized review.
+6. Once the reviewer is satisfied, the reviewer marks the code review task as complete in CATER. This signifies a finalized review.
 
 **Rationale:** Review can lead to more efficient and effective code and uncover potential problems that the developer may have missed. It also leads to more effective collaboration among developers and helps prevent code duplication.
  
