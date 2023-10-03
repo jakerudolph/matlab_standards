@@ -25,7 +25,7 @@
 
 ## Units
 
-**Description:** Variable names **MUST** be documented, either in the variable name, or as end-of-line comments in square brackets. Prefer end-of-line comments if addition to the variable name will make it excessively long.
+**Description:** Variable units **MUST** be documented, either in the variable name, or as end-of-line comments in square brackets. Prefer end-of-line comments if addition to the variable name will make it excessively long.
 
 **Rationale:** Maintain readability by using concise variable names.
 
