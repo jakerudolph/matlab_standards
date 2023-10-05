@@ -80,7 +80,7 @@ function temperatureK = convertCelsiusToKelvin(temperatureC)
 	
 ## The 'n' Prefix
 
-**Description:** The prefix n **SHOULD** be used for variables that represent a number of things. The prefix **SHOULD NOT** be used for other purposes, and other prefixes for representing the number of things **SHOULD NOT**.
+**Description:** The prefix n **SHOULD** be used for variables that represent a number of things. The prefix **SHOULD NOT** be used for other purposes, and other prefixes for representing the number of things **SHOULD NOT** be used.
 
 **Rationale:** Variables starting with this prefix can easily be identified.
 
