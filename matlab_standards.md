@@ -70,12 +70,12 @@ end
 
 DO:
 ```matlab
-function tk = convC2k(temp)
+function degreesK = convertCelsiusToKelvin(degreesC)
 ```
 
 DON'T:
 ```matlab
-function temperatureK = convertCelsiusToKelvin(temperatureC) 
+function dk = convC2k(degrees) 
 ```
 	
 ## The 'n' Prefix
@@ -100,7 +100,7 @@ lineCount
 
 ## Name Length
 
-**Description:** Variable names should be at most 32 characters long. Function names should be at least 3 and at most 32 characters long.
+**Description:** Variable names **should** be at most 32 characters long. Function names **should** be at least 3 and at most 32 characters long.
 
 **Rationale:** Names shall be descriptive, so should not be too short. However, variable names can sometimes be single characters (x, y) and still be descriptive. Names that are too long can reduce readability because they introduce long lines of code.
 
@@ -158,11 +158,11 @@ chair.weightOfChair
 
 ## Names to Avoid
 
-**Description:** Names of classes, functions, variables, properties and struct fields **SHOULD NOT** start with temp, my and they **SHOULD NOT** have names such as myClass, testFunction, etc.
+**Description:** Names of classes, functions, variables, properties and struct fields **SHOULD NOT** start with generic names (test, temp, my, the) as listed below and they **SHOULD NOT** have names such as myClass, testFunction, etc.
 
-**Rationale:** Names like these do not properly indicate what the class, function or variable is for.
+**Rationale:** Names like these are unhelpful and do not properly indicate what the class, function or variable is for.
 
-In particular: 
+In particular, do not use the following (or similar names): 
 ```matlab
 myClass 
 my_Class 
@@ -178,12 +178,14 @@ myProp
 my_prop 
 temp 
 tmp 
-test 
+test
+testing
+temporary 
 ```
 
 ## Function Names Document Their Use
 
-**Description:** The names of functions **MUST** document their use.
+**Description:** The names of functions **MUST** document their specific use.
 
 **Rationale:** By choosing a clear and descriptive name, the code becomes more readable.
 
@@ -197,7 +199,9 @@ gui_sliderControl
 
 DON'T:
 ```matlab
-modelFunction 
+modelFunction
+doTheThing
+MeasureStuff
 ```
 
 ## Function Name Construction
