@@ -1193,6 +1193,12 @@ end
 
 **Rationale:** Short functions are more likely to be readable, reusable and testable. 
 
+## Single Responsibility
+
+**Description:** Single responsibility principle : all sub-functions and most functions **SHOULD** do one thing very well, and encapsulate a single idea. 
+
+**Rationale:** The single responsibility principle makes code more readable, modular, and testable. Multi-purpose functions can often be split up into atomic units which are called on the input data in sequence. Functions should not try to be all things to all users. 
+
 ## Number of Function Arguments
 
 **Description:** The number of inputs and outputs of a function **SHOULD** be limited to five. If necessary, combine multiple arguments into a struct. 
@@ -1262,21 +1268,21 @@ DON'T:
 
 ## Getters and Setters
 
-**Description:** Dependent properties **SHOULD** not be used. Write explicit methods for getting or setting property values if necessary instead of get.<property> and set.<property>syntax.
+**Description:** Dependent properties **SHOULD NOT** be used. Write explicit methods for getting or setting property values if necessary instead of get.property and set.property syntax.
 
 **Rationale:** Property getters and setters can cause unexpected behavior because code is run unexpectedly when the property's value is changed or requested. 
 
 ## Nesting Depth
 
-**Description:** Clocks of code **SHOULD NOT** be nested deeper than ten levels. If necessary, refactor into multiple functions. When possible, keep nesting depth within 5.
+**Description:** Blocks of code **MUST NOT** be nested deeper than ten levels, and **SHOULD NOT** be nested deeper than five levels. If necessary, refactor into multiple functions.
 
 **Rationale:** Deeply nested code is often less readable and it can be a sign of inefficient code. 
 
 ## Repeated Code
 
-**Description:** If a function contains a block of code that is repeated more than one time, it **SHOULD** be refactored into a single function. 
+**Description:** If a function contains a block of code that is repeated more than one time, it **SHOULD** be refactored into a single block of code. 
 
-**Rationale:** Refactoring of repeated blocks of code into single functions increases the maintainability, readability and reusability of the code. 
+**Rationale:** Refactoring of repeated blocks of code increases the maintainability, readability and reusability of the code. 
 
 ## Structure Ownership
 
@@ -1303,12 +1309,6 @@ out = car;
 % do not remove fields from existing struct 
 car = rmfield(car, 'speed');
 ```
-
-## Single Responsibility
-
-**Description:** Single responsibility principle : all sub-functions and most functions **SHOULD** do one thing very well, and encapsulate a single idea. 
-
-**Rationale:** The single responsibility principle makes code more readable, modular, and testable. Multi-purpose functions can often be split up into atomic units which are called on the input data in sequence. Functions should not try to be all things to all users. 
 
 ## Commented Out Code
 
@@ -1411,7 +1411,7 @@ end
 
 **Description:** Code **SHOULD** be independent of Java and therefore **SHOULD NOT** have Java dependencies, dependencies such as: javacomponent, javaMethod, javaObjectEDTetc. 
 
-**Rationale:** Java packages and subpackages will not be available in MATLAB in a future release. 
+**Rationale:** Java packages and subpackages will not be available in MATLAB in a future release.
 
 # Standards for Graphical User Interfaces (GUIs)
 
@@ -1461,7 +1461,7 @@ end
 
 **Description:** GUIs **SHOULD** have tooltips that explain what components do.
 
-**Rationale:** Tooltips make GUIs easier to use and understand.
+**Rationale:** Tooltips make GUIs easier to use and understand and can serve as a sort of self-documentation.
 
 ## Containers
 
