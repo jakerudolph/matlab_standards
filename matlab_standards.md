@@ -158,7 +158,7 @@ chair.weightOfChair
 
 ## Names to Avoid
 
-**Description:** Names of classes, functions, variables, properties and struct fields **SHOULD NOT** start with generic names (test, temp, my, the) as listed below and they **SHOULD NOT** have names such as myClass, testFunction, etc.
+**Description:** Names of classes, functions, variables, properties and struct fields **SHOULD NOT** start with generic names (temp, my, the) as listed below and they **SHOULD NOT** have names such as myClass, testFunction, etc. The only exception is a unit test method or file, which may incorporate the word test.
 
 **Rationale:** Names like these are unhelpful and do not properly indicate what the class, function or variable is for.
 
@@ -177,8 +177,9 @@ theVar
 myProp 
 my_prop 
 temp 
-tmp 
+tmp
 test
+tst
 testing
 temporary 
 ```
@@ -231,7 +232,7 @@ sliderstuff
 
 ## Casing (General)
 
-**Description:** Variables, functions, classes, and other MATLAB objects **MUST** each use a consistent casing style throughout a script.
+**Description:** Variables, functions, classes, and other MATLAB objects **MUST** each use a consistent casing style throughout a file.
 
 **Rationale:** Consistent casing increases readability and maintainability.
 
@@ -258,12 +259,12 @@ sliderstuff
 
 **Description:** The is prefix **SHOULD** be used for functions returning logical values or properties and variables holding logical values.
 
-**Rationale:** This increases the readability of the code as it is clear from the name.
+**Rationale:** This increases the readability of the code as it is clear from the name, and avoids unexpected code behavior.
 
 
 ## Abbreviations
 
-**Description:** Variable names **SHOULD NOT** contain abbreviations; except for idiomatic abbreviations commonly used at SLAC. (Found in SLAC Speak)
+**Description:** Variable names **SHOULD NOT** contain abbreviations; except for idiomatic abbreviations commonly used at SLAC.
 
 **Rationale:** Maintain readability by not abbreviating words in your variable names. Common acronyms are allowed.
 
@@ -279,18 +280,22 @@ bpm
 toro 
 xcor 
 ycor 
-bdes 
+bdes
+rf_phase
+sc_linac
+ltuh_xcor
 ```
 	
 DON'T:
 ```matlab
 arrTim 
 bpmC
+phcvty
 ```	
 	
 ## The 'Test' Suffix
 
-**Description:** The suffix "Test" **SHOULD** only be used for unit test filenames.
+**Description:** The suffix "Test" or "test" **SHOULD** only be used for unit test filenames.
 
 **Rationale:** This increases the readability of the code as it is clear from the name of the file that it is a unit test file.
 
@@ -298,9 +303,9 @@ bpmC
 
 ## Comment Usage
 
-**Description:** All code **MUST** use comments to explain code functionality. Comments should explain what the code does, how it works, and why it is performing this function. 
+**Description:** All code **MUST** use comments to explain code functionality. Comments should explain what the code does, how it works, and why it is performing this function.
 
-**Rationale:** Descriptive comments make it easier to read code. 
+**Rationale:** Descriptive comments make it easier to read code and figure out how the code works. 
 
 ## Comment Content
 
@@ -325,7 +330,7 @@ end
 
 DON'T:
 ```matlab
-BPM_x = 12; % x BPM coordinate 
+BPM_x = 12; % set x BPM coordinate to 12
 	 
 % find x BPMs in range 
 in_range = false(nBPMS, 1); 
@@ -340,13 +345,13 @@ end
 
 **Description:** Comments **SHOULD** be used at least every 15 lines. 
 
-**Rationale:** This rule helps to avoid going too long without commenting code. 
+**Rationale:** This general rule helps to avoid going too long without commenting code. 
 
 ## Sign and Date Comments
 
 **Description:** Comments with a date and signature **MAY** be used when adding code to an existing file.
 
-**Rationale:** This ensures that other code maintainers have access to information about the code history regardless of how version control is deployed. 
+**Rationale:** This ensures that other code maintainers have access to information about the code history regardless of how version control is deployed, and can easily contct the last person who modified the code if there are conflicts/question. 
 
 ## Comment Blocks
 
@@ -418,7 +423,7 @@ end
  
 DON'T
 ```matlab
-while(ismember(x, [3,5,7,11,13])) 
+while ismember(x,[3,5,7,11,13])
     x = x + 2; 
 end
  ```
@@ -427,7 +432,7 @@ end
 
 **Description:** Lines **SHOULD** be no more than 120 characters long, including comments. When possible, keep lines shorter than 80 characters long. 
 
-**Rationale:** A line of code should fit on a screen. Long lines of code are difficult to interpret and generally indicate great complexity.
+**Rationale:** A line of code should fit on a screen. Long lines of code are difficult to interpret and generally indicate excessive complexity.
 
 DO:
 ```matlab
@@ -528,7 +533,7 @@ isDone = isImplemented && ...
 
 **Description:** Multiple properties and methods blocks with equal attribute values **SHOULD** be combined into one. Do not set attributes to their default values. 
 
-**Rationale:** Having multiple blocks with the same attributes is unnecessary and decreases the readability of classdef files. 
+**Rationale:** Having multiple blocks with the same attributes is unnecessary and decreases the readability of code. 
 
 DO
 ```matlab
@@ -628,7 +633,7 @@ x_out = x_out * scaling_factor; % now recslaed
 
 ## Align Struct Definition
 
-**Description:** When defining a struct, thenames and values of the struct fields **SHOULD** be aligned. 
+**Description:** When defining a struct, the names and values of the struct fields **SHOULD** be aligned. 
 
 **Rationale:** This improves readability of the code by making it clearer what fields are defined and by what values. 
 
