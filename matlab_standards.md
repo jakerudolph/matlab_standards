@@ -692,9 +692,9 @@ end
 DO:
 ```matlab
 function [var1, var2, var3] = get_vars() 
-    var1; % the first variable 
-    var2; % the second variable 
-    var3; % the third variable 
+    var1; % used for base value 
+    var2; % will hold the square of var1
+    var3; % scales var2 for use in delta_calculate
     var1 = 10 ; 
     var2 = var1^2; 
     var3 = var2 * 12; 
@@ -712,7 +712,7 @@ end
 
 ## Magic Numbers
 
-**Description:** Magic numbers **SHOULD NOT** be used in expressions. Define them as variables constants before using them. 
+**Description:** Magic numbers **SHOULD NOT** be used in expressions. Define them as constants before using them. 
 
 **Rationale:** This encourages reuse and documentation of numerical constants and improves overall readability.
 
@@ -735,7 +735,7 @@ end
 
 ## Function Calls Without Inputs
 
-**Description:** Empty parentheses **SHOULD** be used for function calls without input arguments. 
+**Description:** Empty parentheses **MUST** be used for function calls without input arguments. 
 
 **Rationale:** This helps to emphasize the fact that they are function calls and not variables or properties. 
 
@@ -817,7 +817,7 @@ DO:
 if x > 0 
     saveData() 
 else 
-    % x does not indicate we want to save the dataset. 
+    % x does not indicate we want to save, so do nothing  
 end 
 ```
 
@@ -828,7 +828,7 @@ if x > 0
 end
 ```
 
-## Switch Otherwise
+## Switch Otherwise:
 
 **Description:** Every switch **SHOULD** have an otherwise section, even if it does not contain executable code. 
 
@@ -843,7 +843,7 @@ switch reply
         clearData() 
     otherwise 
         % Should not get here. 
-        error("Unknown reply " + reply) 
+        error("Unknown reply: " + reply) 
 end 
 ```
 
@@ -859,7 +859,7 @@ end
 
 ## Mixed Types in Expressions
 
-**Description:** Multiple operand types **SHOULD NOT** be used in a single operator. For example, do not mix logical and numerical operatonds with a multiplication operator. 
+**Description:** Multiple operand types **SHOULD NOT** be used in a single operator. For example, do not mix logical and numerical operands with a multiplication operator. 
 
 **Rationale:** Mixing operand types per operator can cause unexpected results and can lead to errors in case of true incompatibilities. 
 
@@ -881,12 +881,12 @@ d = a * b && c;
 
 DO:
 ```matlab
-d = a && b || c;
+d = (a && b) || c; 
 ```
  
 DON'T:
 ```matlab
-d = (a && b) || c; 
+d = a && b || c;
 ```
 
 ## Parentheses in Mathematical Expressions
@@ -975,8 +975,11 @@ Bpm_tmit
 
 DO:
 ```matlab
-s = struct("f", 2, "g", 3, "h", 'new field'); 
-	 
+s = struct(...
+    "f", 2, ...
+    "g", 3, ...
+    "h", 'new field');
+
 computeCost(s); 
 ```
 
@@ -997,7 +1000,7 @@ Additionally, it can be overlooked when variables are defined or altered by call
 
 ## Keywords Break, Continue, and Return
 
-**Description:** Use the keywords break, continue and return **SHOULD** be avoided. 
+**Description:** Use of the keywords break, continue and return **SHOULD** be avoided. 
 
 **Rationale:** Using break, continue or return decreases readability because the end of the function is not always reached. By avoiding these keywords, the flow of the code remains clear. However, these keywords can be useful to reduce complexity and improve performance. 
 
@@ -1107,7 +1110,7 @@ index = intersect(find(v > MIN), find(v < MAX));
 
 **Description:** Vectorization **SHOULD** be used to apply operations to arrays where feasible.
 
-**Rationale:** Vectorized loops are faster, more robust, more readable, and more maintainable. 
+**Rationale:** Vectorized loops are faster, more robust, more readable, and more maintainable. Matlab was designed to work in this way. 
 
 DO:
 ```matlab
