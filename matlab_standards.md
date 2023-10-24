@@ -1535,7 +1535,13 @@ Code review and formal release **MUST** take place for any deployment of product
 
 An example of a trivial change would be a simple and specific bug fix or adding a simple UI element (like a logbook button); this does not require following the formal review/release procedures below. It is left to the developer to determine if their change is trivial and to ensure that they follow these rules if their change is non-trivial. It is also left to the developer and reviewer to determine what form code review takes and if any external tools are used (e.g. Github) to aid in the process. The reviewer may be anyone of the developer's choosing, and the proposed reviewer should be transparent about their availability/expertise while reserving the right to decline.
 
-Code review does not imply that all pre-existing code has to conform to this entire standards document. Only the new or newly modified portions of the code are expected to conform to these standards.
+Code review does not imply that all pre-existing code has to conform to this entire standards document. Only the new or newly modified portions of the code are expected to conform to these standards. It is also not specified how detailed the review has to be, this is intentionally left to the developer and the reviewer. At a minimum, the reviewer **MUST** verify the following for the new/modified code they are reviewing:
+
+- The standards are being followed.
+- The code is generally readable and maintainable.
+- The code contains sufficient commenting so that another developer may understand how it works.
+- Sufficient error handling is implemented.
+- The code appears to be functional and is unlikely to break any existing production code functionality.
 
 ## Review Criteria and Process
 
