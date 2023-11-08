@@ -1446,7 +1446,7 @@ end
 
 ## Services and Persistent Global Processes
 
-**Description:** Services, models, servers or other processes that run persistently to provide functionality for multiple clients **SHOULD** have stop, start, restart and view log buttons along with a heartbeat and process running indicators. These buttons **SHOULD** be placed on a watcher panel.
+**Description:** Services, models, servers or other processes that run persistently to provide functionality for multiple clients **SHOULD** have stop, start, restart and view log buttons along with heartbeat and process running indicators. These buttons **SHOULD** be placed on a watcher panel.
 
 **Rationale:** Any important global service needs to be accessible and transparent to all, with the ability to determine if said service is running and attempt to restart it if it is not running.
 
