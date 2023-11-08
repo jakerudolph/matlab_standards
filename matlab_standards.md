@@ -5,7 +5,7 @@
 
 **Scope:** This document details source code requirements and programming idioms required for all MATLAB code of the Accelerator Directorate, SLAC National Accelerator Laboratory. It additionally gives some recommended practices and examples.
 
-**Purpose:** The purpose of this document is to provide consistent guidelines for producing robust, readable code.
+**Purpose:** The purpose of this document is to provide consistent guidelines for producing robust, readable code that is more easily maintained and understood by current and future developers.
 
 **Use of Normative Statements:**
 
@@ -158,7 +158,7 @@ chair.weightOfChair
 
 ## Names to Avoid
 
-**Description:** Names of classes, functions, variables, properties and struct fields **SHOULD NOT** start with generic names (temp, my, the) as listed below and they **SHOULD NOT** have names such as myClass, testFunction, etc. The only exception is a unit test method or file, which may incorporate the word test.
+**Description:** Names of classes, functions, variables, properties and struct fields **MUST NOT** start with generic names (test, my, the) as listed below and they **MUST NOT** have names such as myClass, testFunction, etc. The only exception is a unit test method or file, which may incorporate the word test.
 
 **Rationale:** Names like these are unhelpful and do not properly indicate what the class, function or variable is for.
 
@@ -176,12 +176,9 @@ my_var
 theVar 
 myProp 
 my_prop 
-temp 
-tmp
 test
 tst
-testing
-temporary 
+testing 
 ```
 
 ## Function Names Document Their Use
@@ -493,7 +490,7 @@ z=[1,23,8.1]*(x^3.1415)*sqrt(y);
 
 ## Commas in Rows
 
-**Description:** Commas **SHOULD** be used to separate elements in a row. Place the comma directly after the element. 
+**Description:** Commas **MUST** be used to separate elements in a row. Place the comma directly after the element. 
 
 **Rationale:** This improves readability, especially in arrays of strings or character vectors. 
 
@@ -633,16 +630,16 @@ x_out = x_out * scaling_factor; % now recslaed
 
 ## Align Struct Definition
 
-**Description:** When defining a struct, the names and values of the struct fields **SHOULD** be aligned. 
+**Description:** When defining a struct, the names and values of the struct fields **SHOULD** be aligned. Each field **MAY** be commented. 
 
 **Rationale:** This improves readability of the code by making it clearer what fields are defined and by what values. 
 
 DO:
 ```matlab
 s = struct(... 
-    "name",     "Albert", ... 
-    "age",      2021 - 1979, ... 
-    "isValid",  ismember("Albert", allNames)) 
+    "name",     "Albert", ... % String, first name of physicist
+    "age",      73, ... % Integer, age of physicist in years
+    "isValid",  ismember("Albert", allNames)) % Logical, represents if actively employed
 ```
      
 DON'T:
@@ -685,27 +682,35 @@ end
 
 ## Variable Declarations
 
-**Description:** Variables **SHOULD** be declared at the top of a function, even for variables that do not yet have a value.  
+**Description:** Array variables MUST be pre-allocated to the expected total size if elements will be added/modified individually. All variables MAY be declared at the top of a function for readability.
 
-**Rationale:** Declaring variables at once improves readability, and pre-allocating memory to variables improves code performance 
+**Rationale:** Pre-allocating array sizes instead of repeatedly resizing an array improves code performance and memory management. It is easier to find and modify variable in general if they are at the top of a function.
 
 DO:
 ```matlab
-function [var1, var2, var3] = get_vars() 
-    var1; % used for base value 
-    var2; % will hold the square of var1
-    var3; % scales var2 for use in delta_calculate
+function [var1, var2, var3, finalvar] = get_vars() 
     var1 = 10 ; 
-    var2 = var1^2; 
+    var2 = var1^2;
     var3 = var2 * 12; 
-end 
+    finalvar = zeros(1, 10000);
+    for iElem = 2:10000
+        finalvar(iElem) = finalvar(iElem-1) + 2;
+    end
+end
 ```
 
 DON'T:
 ```matlab
-function [var1, var2, var3] = get_vars() 
+function [var1, var2, var3, finalvar] = get_vars() 
+    finalvar = 0;
+    for iElem = 2:10000
+        finalvar(iElem) = finalvar(iElem-1) + 2;
+    end
     var1 = 10 ; 
+    do_some_other_thing;
+    check_device_status;
     var2 = var1^2;
+    disp(var1);
     var3 = var2 * 12; 
 end
 ```
@@ -751,11 +756,11 @@ x = rand * 2;
 
 ## One Statement Per Line
 
-**Description:** Each line **SHOULD** have at most one statement
+**Description:** Each line **SHOULD** have at most one statement.
 
 **Rationale:** Maintain readability of your code by having each line of code do exactly one thing. 
 
-**Exception:** One can declare a maximum of three variables on a single line if they are all of the same type or unit. One can place an if, for or while statement on one line if there is exactly one statement inside of the loop. 
+**Exception:** One can declare a maximum of three variables on a single line if they are all of the same type or unit. One can place a simple if/else statement or ternary operation on one line. A for or while statement can be placed on one line if there is exactly one statement inside of the loop. 
 
 DO:
 ```matlab
@@ -803,7 +808,10 @@ time_limit = 2; % [minutes]
 time_elapsed = time_stop - time_start; 
 	 
 % One line loop: 
-for iNode = 1 : 3, x = x + iNode; end  % 1 statement inside loop is allowed 
+for iNode = 1 : 3, x = x + iNode; end  % 1 statement inside loop is allowed
+
+% One line if/else (or equivalent ternary operation) with only one statement per branch:
+if (a > b), b = 0; else, b = 1; end
 ```
  
 ## If/Else
@@ -1002,7 +1010,7 @@ Additionally, it can be overlooked when variables are defined or altered by call
 
 **Description:** Use of the keywords break, continue and return **SHOULD** be avoided. 
 
-**Rationale:** Using break, continue or return decreases readability because the end of the function is not always reached. By avoiding these keywords, the flow of the code remains clear. However, these keywords can be useful to reduce complexity and improve performance. 
+**Rationale:** Using break, continue or return decreases readability because the end of the function/loop is not always reached. By avoiding these keywords, the flow of the code remains clear. However, these keywords can occasionally be useful to reduce complexity and improve performance, hence a recommendation level of should applies and they may be used (with developer justification) in certain situations. 
 
 DO:
 ```matlab
@@ -1010,16 +1018,31 @@ if isempty(x)
     % No further actions. 
 else 
     <rest of the code> 
-end  
+end
+
+for iNode = 1:10
+   if (iNode == 3)
+      % no further action
+   else
+      <rest of code>
+   end
+end
+
 ```
 
 DON'T:
 ```matlab
 if isempty(x) 
     return 
-end 
- 
+end
 <rest of the code>
+
+for iNode = 1:10
+   if (iNode == 3)
+      continue
+   end
+   <rest of code>
+end
 ```
 
 ## Shell Escape
@@ -1132,7 +1155,7 @@ end
 
 ## Zero Before Decimal Point
 
-**Description:** A zero before the decimal point **SHOULD** be used in numeric expressions. 
+**Description:** A zero before the decimal point **MUST** be used in numeric expressions. 
 
 **Rationale:** Increases the readability of the code. 
 
@@ -1286,9 +1309,9 @@ DON'T:
 
 ## Structure Ownership
 
-**Description:** Ownership of a structure resides with the creator of that structure, so fields **SHOULD NOT** be added or removed from an existing structure outside of the function in which it was created. 
+**Description:** Ownership of a structure resides with the creator of that structure, so fields **SHOULD NOT** be added or removed from an existing structure outside of the function in which it was created.
 
-**Rationale:** Adding or removing fields from an existing structure outside of the function in which it was created reduces the robustness of the code. Related to coder compatibility, in generated code, adding a new field to a structure that has already been read or indexed will cause an error. 
+**Rationale:** Adding or removing fields from an existing structure outside of the function in which it was created reduces the robustness of the code. Related to coder compatibility, in generated code, adding a new field to a structure that has already been read or indexed will cause an error. If there is a need to modify a structure created elsewhere, consider reformatting the code to convert the structure to a class.
 
 DO:
 ```matlab
@@ -1420,6 +1443,12 @@ end
 **Description:** Model classes **SHOULD** be able to run without the GUI itself. Consider the separate aspects of a model, including service logic, service configuration, and application state management.
 
 **Rationale:** Separable models allow for service logic to be run without the overhead of the GUI, increasing the usability of code across multiple platforms.
+
+## Services and Persistent Global Processes
+
+**Description:** Services, models, servers or other processes that run persistently to provide functionality for multiple clients **SHOULD** have stop, start, restart and view log buttons along with a heartbeat and process running indicators. These buttons **SHOULD** be placed on a watcher panel.
+
+**Rationale:** Any important global service needs to be accessible and transparent to all, with the ability to determine if said service is running and attempt to restart it if it is not running.
 
 ## Resizing
 
