@@ -682,16 +682,16 @@ end
 
 ## Variable Declarations
 
-**Description:** Array variables MUST be pre-allocated to the expected total size if elements will be added/modified individually. All variables MAY be declared at the top of a function for readability.
+**Description:** Array variables **MUST** be pre-allocated to the expected total size if elements will be added/modified individually. All variables MAY be declared at the top of a function for readability.
 
 **Rationale:** Pre-allocating array sizes instead of repeatedly resizing an array improves code performance and memory management. It is easier to find and modify variable in general if they are at the top of a function.
 
 DO:
 ```matlab
 function [var1, var2, var3, finalvar] = get_vars() 
-    var1 = 10 ; 
-    var2 = var1^2;
-    var3 = var2 * 12; 
+    var1 = 10 ; % feet, width of concrete pad
+    var2 = var1^2; % square feet, area of concrete pad
+    var3 = var2 * 12; % square feet, total for 12 concrete pads
     finalvar = zeros(1, 10000);
     for iElem = 2:10000
         finalvar(iElem) = finalvar(iElem-1) + 2;
@@ -706,12 +706,12 @@ function [var1, var2, var3, finalvar] = get_vars()
     for iElem = 2:10000
         finalvar(iElem) = finalvar(iElem-1) + 2;
     end
-    var1 = 10 ; 
+    var1 = 10 ; % feet, width of concrete pad
     do_some_other_thing;
     check_device_status;
-    var2 = var1^2;
+    var2 = var1^2; % square feet, area of concrete pad
     disp(var1);
-    var3 = var2 * 12; 
+    var3 = var2 * 12; % square feet, total for 12 concrete pads
 end
 ```
 
