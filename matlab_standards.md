@@ -760,7 +760,7 @@ x = rand * 2;
 
 **Rationale:** Maintain readability of your code by having each line of code do exactly one thing. 
 
-**Exception:** One can declare a maximum of three variables on a single line if they are all of the same type or unit. One can place a simple if/else statement or ternary operation on one line. A for or while statement can be placed on one line if there is exactly one statement inside of the loop. 
+**Exception:** One can declare a maximum of three variables on a single line if they are all of the same type or unit. One can place a simple if/else statement or ternary conditional operation on one line. A for or while statement can be placed on one line if there is exactly one statement inside of the loop. 
 
 DO:
 ```matlab
