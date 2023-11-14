@@ -682,7 +682,7 @@ end
 
 ## Variable Declarations
 
-**Description:** Array variables **MUST** be pre-allocated to the expected total size if elements will be added/modified individually. All variables MAY be declared at the top of a function for readability.
+**Description:** Array variables **MUST** be pre-allocated to the expected total size if elements will be added/modified individually. All variables **MAY** be declared at the top of a function for readability.
 
 **Rationale:** Pre-allocating array sizes instead of repeatedly resizing an array improves code performance and memory management. It is easier to find and modify variable in general if they are at the top of a function.
 
