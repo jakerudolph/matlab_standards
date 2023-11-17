@@ -1,6 +1,6 @@
 # MATLAB Programming Standards
 
-**STATUS:** This document was published Nov. 14th, 2023. It is the source repository for the [Matlab Standards Site](https://slaclab.github.io/matlab_standards/).
+**STATUS:** This document was published Nov. 14th, 2023.
 
 **Scope:** This document details source code requirements and programming idioms required for all MATLAB code of the Accelerator Directorate, SLAC National Accelerator Laboratory. It additionally gives some recommended practices and examples.
 
@@ -12,4 +12,4 @@
   * **SHOULD,** in all capitalized letters, indicates a recommended standard.
   * **MAY,** in all capitalized letters, indicates a recommended, but optional practice.
 
-If you would like to suggest a modification to these standards, please make a branch and create a pull request.
+If you would like to suggest a modification to these standards, please make a branch and create a pull request using the edit page link.
