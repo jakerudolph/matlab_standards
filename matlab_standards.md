@@ -1,7 +1,7 @@
 # MATLAB Standards
 *These standards apply to all newly written or newly modified code. It is not expected that existing code will be retrofitted to conform with these standards.*
 
-**Status:** This document was published Nov. 14th, 2023. It was last updated Nov. 14th, 2023. If you wish to propose a change/updated, please create a pull request. The repository lives [here](https://github.com/slaclab/matlab_standards/).
+**Status:** This document was published Nov. 14th, 2023. It was last updated Nov. 14th, 2023. If you wish to propose a change/update, please create a pull request. The repository lives [here](https://github.com/slaclab/matlab_standards/).
 
 **Scope:** This document details source code requirements and programming idioms required for all MATLAB code of the Accelerator Directorate, SLAC National Accelerator Laboratory. It additionally gives some recommended practices and examples.
 
