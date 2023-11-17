@@ -1550,5 +1550,5 @@ All errors, both from MATLAB and in the functional execution of code, **MUST** b
 
 
 # Code Review and Release
-There is a [code review and release procedure](https://www.slac.stanford.edu/grp/ad/docs/model/matlab/programmers_guide.html#appendix_b:_software_release_procedure) documented as Appendix B in the Matlab Physics Applications Programmers Guide. Please adhere to this procedure when releasing code to the production controls system. 
+There is a code review and release procedure documented as Appendix B: Software Release Procedure in the [Matlab Physics Applications Programmers Guide](https://www.slac.stanford.edu/grp/ad/docs/model/matlab/programmers_guide.html#appendix_b:_software_release_procedure). Please adhere to this procedure when releasing code to the production controls system. 
 
