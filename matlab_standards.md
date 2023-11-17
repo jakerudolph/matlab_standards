@@ -100,7 +100,7 @@ lineCount
 
 ## Name Length
 
-**Description:** Variable names **should** be at most 32 characters long. Function names **should** be at least 3 and at most 32 characters long.
+**Description:** Variable names **SHOULD** be at most 32 characters long. Function names **SHOULD** be at least 3 and at most 32 characters long.
 
 **Rationale:** Names shall be descriptive, so should not be too short. However, variable names can sometimes be single characters (x, y) and still be descriptive. Names that are too long can reduce readability because they introduce long lines of code.
 
