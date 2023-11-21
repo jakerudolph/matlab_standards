@@ -1548,6 +1548,11 @@ All errors, both from MATLAB and in the functional execution of code, **MUST** b
 
 **Rationale:** EPICS interaction can produce a variety of errors that need to be handled properly. Furthermore, when operating on devices in the field, it is critically important that the status/outcome of the operation is definitively known and clearly communicated to the end user. 
 
+## Printing and Logging Actions on the Accelerator
+
+**Description:** The Matlab function disp_log() **SHOULD** be used when starting an automated measurement/procedure, persistent process, or whenever any important action on an accelerator is initiated from Matlab code. This function is similar to disp() in that it takes a message as an argument, but it is more thorough because it prints a timestamp-prepended message to the Matlab terminal and also passes the same message to CMLog.
+
+**Rationale:** This aids in debugging and in the tracking down of processes that are producing unintended consequences or errors on actual accelerator devices. CMLog entries persist and can be used after the fact to figure out why a device was changed in an unanticipated manner.
 
 # Code Review and Release
 There is a code review and release procedure documented as Appendix B: Software Release Procedure in the [Matlab Physics Applications Programmers Guide](https://www.slac.stanford.edu/grp/ad/docs/model/matlab/programmers_guide.html#appendix_b:_software_release_procedure). Please adhere to this procedure when releasing code to the production controls system. 
